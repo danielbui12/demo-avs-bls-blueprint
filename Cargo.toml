@@ -1,0 +1,46 @@
+[package]
+name = "test_eigen_bls_blueprint"
+version = "0.1.0"
+edition = "2021"
+description = "temo"
+authors = ["Daniel Bui <79790753+danielbui12@users.noreply.github.com>"]
+license = "MIT OR Apache-2.0"
+homepage = "demo"
+repository = "https://github.com/danielbui12/test_eigen_bls_blueprint"
+readme = "README.md"
+categories = ["cryptography", "cryptography::cryptocurrencies"]
+keywords = ["tangle", "blueprint", "avs"]
+rust-version = "1.88"
+
+[dependencies]
+# git = "https://github.com/tangle-network/blueprint.git", rev = "fa9eabf16aff9325ba30039653ffe9aca19afb06"
+blueprint-sdk = { version = "0.1.0-alpha.19", default-features = false, features = ["std", "eigenlayer", "evm", "macros", "build"], path = "/Users/huytung/Documents/tangle_network/blueprints/blueprint/crates/sdk" }
+serde = { version = "1.0.208", features = ["derive"] }
+
+
+[build-dependencies]
+# git = "https://github.com/tangle-network/blueprint.git", rev = "fa9eabf16aff9325ba30039653ffe9aca19afb06"
+blueprint-sdk = { version = "0.1.0-alpha.19", default-features = false, features = ["std", "eigenlayer", "evm", "macros", "build"], path = "/Users/huytung/Documents/tangle_network/blueprints/blueprint/crates/sdk" }
+
+[features]
+default = ["std"]
+std = ["blueprint-sdk/std"]
+
+[lib]
+path = "src/lib.rs"
+
+[[bin]]
+name = "test_eigen_bls_blueprint"
+path = "src/main.rs"
+
+[package.metadata.blueprint]
+manager = { Evm = "TangleTaskManager" }
+
+[[package.metadata.gadget.Native.sources]]
+owner = "danielbui12"
+repo = "test_eigen_bls_blueprint"
+tag = "0.1.0"
+binaries = [
+    { arch = "Amd64", os = "Linux", name = "amd64-linux-test_eigen_bls_blueprint-gadget" },
+    { arch = "Arm64", os = "Linux", name = "arm64-linux-test_eigen_bls_blueprint-gadget" },
+]
