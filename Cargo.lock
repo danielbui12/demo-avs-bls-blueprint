@@ -3325,6 +3325,7 @@ dependencies = [
  "blueprint-keystore",
  "blueprint-macros",
  "blueprint-manager-bridge",
+ "blueprint-networking",
  "blueprint-producers-extra",
  "blueprint-qos",
  "blueprint-router",
@@ -3336,6 +3337,7 @@ dependencies = [
  "eigensdk",
  "openssl-sys",
  "tangle-subxt",
+ "tempfile",
  "thiserror 2.0.11",
  "tokio",
 ]
@@ -17014,7 +17016,12 @@ name = "test_eigen_bls_blueprint"
 version = "0.1.0"
 dependencies = [
  "blueprint-sdk",
+ "color-eyre",
+ "jsonrpc-core",
+ "jsonrpc-http-server",
+ "reqwest 0.12.23",
  "serde",
+ "thiserror 1.0.69",
 ]
 
 [[package]]

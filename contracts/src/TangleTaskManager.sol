@@ -98,13 +98,13 @@ contract TangleTaskManager is
     // NOTE: this function creates new task, assigns it a taskId
     function createNewTask(
         // TODO: replace with your Task params
-        uint256 numberToBeSquared,
+        bytes calldata message,
         uint32 quorumThresholdPercentage,
         bytes calldata quorumNumbers
     ) external onlyTaskGenerator {
         // create a new task struct
         Task memory newTask;
-        newTask.numberToBeSquared = numberToBeSquared;
+        newTask.message = message;
         newTask.taskCreatedBlock = uint32(block.number);
         newTask.quorumThresholdPercentage = quorumThresholdPercentage;
         newTask.quorumNumbers = quorumNumbers;
@@ -194,7 +194,6 @@ contract TangleTaskManager is
         BN254.G1Point[] memory pubkeysOfNonSigningOperators
     ) external {
         uint32 referenceTaskIndex = taskResponse.referenceTaskIndex;
-        uint256 numberToBeSquared = task.numberToBeSquared;
         // some logical checks
         require(
             allTaskResponses[referenceTaskIndex] != bytes32(0), "Task hasn't been responded to yet"
@@ -217,8 +216,8 @@ contract TangleTaskManager is
 
         // TODO: Replace to your use cases
         // logic for checking whether challenge is valid or not
-        uint256 actualSquaredOutput = numberToBeSquared * numberToBeSquared;
-        bool isResponseCorrect = (actualSquaredOutput == taskResponse.numberSquared);
+        // check message length contains more characters
+        bool isResponseCorrect = task.message.length < taskResponse.message.length;
         // if response was correct, no slashing happens so we return
         if (isResponseCorrect == true) {
             emit TaskChallengedUnsuccessfully(referenceTaskIndex, msg.sender);
