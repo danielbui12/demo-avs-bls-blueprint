@@ -88,7 +88,8 @@ async fn main() -> Result<(), blueprint_sdk::Error> {
     });
 
     info!("Starting the event watcher ...");
-    let eigen_config = EigenlayerBLSConfig::new(Address::default(), Address::default());
+    let eigen_config = EigenlayerBLSConfig::new(Address::default(), Address::default())
+        .with_exit_after_register(false);
     BlueprintRunner::builder(eigen_config, env)
         .router(
             // TODO: Update your task

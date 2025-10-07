@@ -12,6 +12,15 @@ cargo tangle blueprint deploy eigenlayer \
   --ordered-deployment
 
 # Using cast to call initialize in TaskManager
+# function initialize(
+#        address initialOwner,
+#        address _aggregator,
+#        address _generator,
+#        address _allocationManager,
+#        address _slasher,
+#        address _serviceManager
+#    )
+# Open docker container and run this:
 cast send 0xc0f115a19107322cfbf1cdbc7ea011c19ebdb4f8 "initialize(address,address,address,address,address,address)" \
   0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC \
   0x90F79bf6EB2c4f870365E785982E1f101E93b906 \
@@ -24,6 +33,6 @@ cast send 0xc0f115a19107322cfbf1cdbc7ea011c19ebdb4f8 "initialize(address,address
 # Open another terminal
 RUST_LOG=all cargo tangle blueprint run \
      -p eigenlayer \
-     -u http://localhost:55003/ \
+     -u http://localhost:55000/ \
      --keystore-path ./test-keystore
 ```
