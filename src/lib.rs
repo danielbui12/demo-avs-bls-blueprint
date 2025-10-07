@@ -1,3 +1,5 @@
+pub mod contexts;
+pub mod jobs;
 pub mod error;
 
 use crate::error::TaskError;
@@ -27,56 +29,18 @@ pub static TASK_MANAGER_ADDRESS: LazyLock<Address> = LazyLock::new(|| {
         .unwrap_or_else(|_| address!("0000000000000000000000000000000000000000"))
 });
 
-pub static PRIVATE_KEY: LazyLock<String> = LazyLock::new(|| {
-    env::var("PRIVATE_KEY").unwrap_or_else(|_| {
+// @dev Anvil Account #3
+pub static AGGREGATOR_PRIVATE_KEY: LazyLock<String> = LazyLock::new(|| {
+    env::var("AGGREGATOR_PRIVATE_KEY").unwrap_or_else(|_| {
+        "7c852118294e51e653712a81e05800f419141751be58f605c371e15141b007a6".to_string()
+    })
+});
+pub static AGGREGATOR_ADDRESS: blueprint_sdk::alloy::primitives::Address = address!("90F79bf6EB2c4f870365E785982E1f101E93b906");
+
+// @dev Anvil Account #4
+pub static GENERATOR_PRIVATE_KEY: LazyLock<String> = LazyLock::new(|| {
+    env::var("GENERATOR_PRIVATE_KEY").unwrap_or_else(|_| {
         "47e179ec197488593b187f80a00eb0da91f1b9d0b13f8733639f19c30a34926a".to_string()
     })
 });
-
-// TODO: Replace with your context name
-#[derive(Clone)]
-pub struct ExampleContext {
-    pub config: BlueprintEnvironment,
-}
-
-pub const EXAMPLE_JOB_ID: u32 = 0;
-
-/// Example task that responds to a task created event
-/// This function is triggered by the NewTaskCreated event emitted by the TangleTaskManager contract
-/// This function response to greeting `Task.message`
-#[blueprint_sdk::macros::debug_job]
-pub async fn example_task(
-    Context(_ctx): Context<ExampleContext>,
-    BlockEvents(events): BlockEvents,
-) -> Result<(), TaskError> {
-    info!("Successfully ran job function!");
-
-    let task_created_events = events.iter().filter_map(|log| {
-        NewTaskCreated::decode_log(&log.inner)
-            .map(|event| event.data)
-            .ok()
-    });
-
-    for task_created in task_created_events {
-        let task = task_created.task;
-        let task_index = task_created.taskIndex;
-
-        info!("Task created: {}", task_index);
-
-        let message_bytes = &task.message;
-        let greeting = std::str::from_utf8(message_bytes)
-            .unwrap_or("<invalid utf8>")
-            .to_string();
-        info!("Greeting: {}", greeting);
-
-        // Calculate the square
-        let greeting_result = format!("Hello, {}!", greeting);
-        info!("Greeting result: {}", greeting_result);
-
-        // Properly encode the result as a uint256 instead of a string
-        let message = SolValue::abi_encode(&greeting_result.as_bytes());
-        info!("Result message: {:?}", message);
-    }
-
-    Ok(())
-}
+pub static GENERATOR_ADDRESS: blueprint_sdk::alloy::primitives::Address = address!("15d34AAf54267DB7D7c367839AAf71A00a2C6A65");
