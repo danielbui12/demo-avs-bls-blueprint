@@ -3,12 +3,12 @@ pub mod error;
 use crate::error::TaskError;
 use crate::TangleTaskManager::NewTaskCreated;
 use blueprint_sdk::alloy::primitives::{address, Address};
-use blueprint_sdk::alloy::sol_types::{SolEvent, SolValue};
 use blueprint_sdk::alloy::sol;
+use blueprint_sdk::alloy::sol_types::{SolEvent, SolValue};
+use blueprint_sdk::evm::extract::BlockEvents;
+use blueprint_sdk::extract::Context;
 use blueprint_sdk::info;
 use blueprint_sdk::runner::config::BlueprintEnvironment;
-use blueprint_sdk::extract::Context;
-use blueprint_sdk::evm::extract::BlockEvents;
 use serde::{Deserialize, Serialize};
 use std::env;
 use std::sync::LazyLock;
@@ -29,14 +29,14 @@ pub static TASK_MANAGER_ADDRESS: LazyLock<Address> = LazyLock::new(|| {
 
 pub static PRIVATE_KEY: LazyLock<String> = LazyLock::new(|| {
     env::var("PRIVATE_KEY").unwrap_or_else(|_| {
-        "ac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80".to_string()
+        "47e179ec197488593b187f80a00eb0da91f1b9d0b13f8733639f19c30a34926a".to_string()
     })
 });
 
 // TODO: Replace with your context name
 #[derive(Clone)]
 pub struct ExampleContext {
-    pub std_config: BlueprintEnvironment,
+    pub config: BlueprintEnvironment,
 }
 
 pub const EXAMPLE_JOB_ID: u32 = 0;

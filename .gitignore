@@ -35,3 +35,7 @@ blueprint.lock
 
 # Soldeer dependencies
 dependencies/
+
+
+tmp
+test-keystore
