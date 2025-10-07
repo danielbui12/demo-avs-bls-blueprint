@@ -14,7 +14,7 @@ rust-version = "1.88"
 
 [dependencies]
 # git = "https://github.com/tangle-network/blueprint.git", rev = "fa9eabf16aff9325ba30039653ffe9aca19afb06"
-blueprint-sdk = { version = "0.1.0-alpha.19", default-features = false, features = ["std", "eigenlayer", "evm", "macros", "build", "testing"], path = "/Users/huytung/Documents/tangle_network/blueprints/blueprint/crates/sdk" }
+blueprint-sdk = { version = "0.1.0-alpha.19", default-features = false, features = ["std", "eigenlayer", "evm", "macros", "build", "testing"], git = "https://github.com/tangle-network/blueprint.git", rev = "fa9eabf16aff9325ba30039653ffe9aca19afb06" }
 serde = { version = "1.0.208", features = ["derive"] }
 jsonrpc-core = { version = "18.0.0", default-features = false }
 jsonrpc-http-server = { version = "18.0.0", default-features = false }
@@ -24,7 +24,7 @@ color-eyre = { version = "0.6", default-features = false }
 
 [build-dependencies]
 # git = "https://github.com/tangle-network/blueprint.git", rev = "fa9eabf16aff9325ba30039653ffe9aca19afb06"
-blueprint-sdk = { version = "0.1.0-alpha.19", default-features = false, features = ["std", "eigenlayer", "evm", "macros", "build"], path = "/Users/huytung/Documents/tangle_network/blueprints/blueprint/crates/sdk" }
+blueprint-sdk = { version = "0.1.0-alpha.19", default-features = false, features = ["std", "eigenlayer", "evm", "macros", "build"], git = "https://github.com/tangle-network/blueprint.git", rev = "fa9eabf16aff9325ba30039653ffe9aca19afb06" }
 
 [features]
 default = ["std"]
