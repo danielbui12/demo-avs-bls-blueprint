@@ -8,14 +8,8 @@ use blueprint_sdk::eigensdk::{
 #[expect(clippy::large_enum_variant, reason = "SDK error is large currently")]
 #[derive(Debug, thiserror::Error)]
 pub enum TaskError {
-    // #[error("Blueprint SDK: {0}")]
-    // BlueprintSDK(#[from] blueprint_sdk::Error),
-    // #[error(transparent)]
-    // SolType(#[from] alloy_sol_types::Error),
-    // #[error(transparent)]
-    // BlsAggregationService(#[from] BlsAggregationServiceError),
-    // #[error("Aggregation: {0}")]
-    // Aggregation(String),
+    #[error("Aggregation: {0}")]
+    Aggregation(String),
     #[error(transparent)]
     OperatorTypesError(#[from] OperatorTypesError),
     #[error("Context: {0}")]

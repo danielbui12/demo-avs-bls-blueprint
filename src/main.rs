@@ -18,6 +18,7 @@ use blueprint::{AGGREGATOR_PRIVATE_KEY, GENERATOR_PRIVATE_KEY, GENERATOR_ADDRESS
 use blueprint::contexts::combined::CombinedContext;
 use blueprint::contexts::client::AggregatorClient;
 use blueprint::contexts::aggregator::AggregatorContext;
+use blueprint::jobs::initialize_task::{initialize_bls_task, INITIALIZE_TASK_JOB_ID};
 // TODO: Replace with your context name
 use blueprint::contexts::example_context::ExampleContext;
 use blueprint::jobs::example_task::{example_task, EXAMPLE_JOB_ID};
@@ -93,6 +94,7 @@ async fn main() -> Result<(), blueprint_sdk::Error> {
             // TODO: Update your task
             Router::new()
                 .route(EXAMPLE_JOB_ID, example_task)
+                .route(INITIALIZE_TASK_JOB_ID, initialize_bls_task)
                 .with_context(combined_context),
         )
         .producer(task_producer)

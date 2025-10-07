@@ -1,71 +1,29 @@
-# <h1 align="center"> An EigenLayer AVS 🌐 </h1>
-
-**A simple Hello World AVS for EigenLayer with the BLS-based Contract Configuration**
-
-## 📚 Overview
-
-This project is about creating a simple Hello World AVS for EigenLayer.
-An AVS (Actively Validated Service) is an off-chain service that runs arbitrary computations for a user-specified period of time.
-
-## 📚 Prerequisites
-
-Before you can run this project, you will need to have the following software installed on your machine:
-
-- [Rust](https://www.rust-lang.org/tools/install)
-- [Forge](https://getfoundry.sh)
-
-You will also need to install [cargo-tangle](https://crates.io/crates/cargo-tangle), our CLI tool for creating and
-deploying Blueprints:
-
-To install the Tangle CLI, run the following command:
-
-> Supported on Linux, MacOS, and Windows (WSL2)
-
-```bash
-curl --proto '=https' --tlsv1.2 -LsSf https://github.com/tangle-network/gadget/releases/download/cargo-tangle-v0.1.2/cargo-tangle-installer.sh | sh
-```
-
-Or, if you prefer to install the CLI from crates.io:
-
-```bash
-cargo install cargo-tangle --force # to get the latest version.
-```
-
-## 🚀 Getting Started
-
-Once `cargo-tangle` is installed, you can create a new project with the following command:
+# How to run
 
 ```sh
-cargo tangle blueprint create --name <project-name> --eigenlayer <type>
+# Build the blueprint
+cargo build --release
+
+# Deploy the blueprint
+## First, deploy the TangleTaskManager
+## Then, deploy the TangleServiceManager
+cargo tangle blueprint deploy eigenlayer \
+  --devnet \
+  --ordered-deployment
+
+# Using cast to call initialize in TaskManager
+cast send 0xc0f115a19107322cfbf1cdbc7ea011c19ebdb4f8 "initialize(address,address,address,address,address,address)" \
+  0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC \
+  0x90F79bf6EB2c4f870365E785982E1f101E93b906 \
+  0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65 \
+  0x8a791620dd6260079bf849dc5567adc3f2fdc318 \
+  0x12699471dF8dca329C76D72823B1b79d55709384 \
+  0xc96304e3c037f81da488ed9dea1d8f2a48278a75 \
+  --private-key 0x2a871d0798f97d79848a013d4936a73bf4cc922c825d33c1cf7073dff6d409c6
+
+# Open another terminal
+RUST_LOG=all cargo tangle blueprint run \
+     -p eigenlayer \
+     -u http://localhost:55003/ \
+     --keystore-path ./test-keystore
 ```
-where `<project-name>` is the name of the project that will be generated, and `<type>` is BLS or ECDSA. If you aren't sure which type to use, you likely want the default: BLS. After all, this is the template for BLS. If you don't specify a type, it will default to BLS.
-
-Upon running the above command, you will be prompted with questions regarding the setup for your generated project. If you aren't sure for any of them, you can just hit enter to select the default for that questions. 
-
-### Note
-If Soldeer fails to update/install the necessary dependencies, you may need to run it manually with the following command:
-
-```bash
-forge soldeer update -d
-```
-
-## 📜 License
-
-Licensed under either of
-
-* Apache License, Version 2.0
-  ([LICENSE-APACHE](LICENSE-APACHE) or http://www.apache.org/licenses/LICENSE-2.0)
-* MIT license
-  ([LICENSE-MIT](LICENSE-MIT) or http://opensource.org/licenses/MIT)
-
-at your option.
-
-## 📬 Feedback and Contributions
-
-We welcome feedback and contributions to improve this blueprint.
-Please open an issue or submit a pull request on
-our [GitHub repository](https://github.com/tangle-network/blueprint-template/issues).
-
-Unless you explicitly state otherwise, any contribution intentionally submitted
-for inclusion in the work by you, as defined in the Apache-2.0 license, shall be
-dual licensed as above, without any additional terms or conditions.
