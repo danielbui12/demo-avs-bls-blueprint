@@ -13,8 +13,7 @@ keywords = ["tangle", "blueprint", "avs"]
 rust-version = "1.88"
 
 [dependencies]
-# git = "https://github.com/tangle-network/blueprint.git", rev = "fa9eabf16aff9325ba30039653ffe9aca19afb06"
-blueprint-sdk = { version = "0.1.0-alpha.19", default-features = false, features = ["std", "eigenlayer", "evm", "macros", "build", "testing"], git = "https://github.com/tangle-network/blueprint.git", rev = "a961d9e6adcca0ffffdf113f01fd46f1f4562a12" }
+blueprint-sdk = { version = "0.1.0-alpha.19", default-features = false, features = ["std", "eigenlayer", "evm", "macros", "build", "testing"], git = "https://github.com/tangle-network/blueprint.git", rev = "24a4f499adbe6d661de0b464f729fcd9434b5e57" }
 serde = { version = "1.0.208", features = ["derive"] }
 jsonrpc-core = { version = "18.0.0", default-features = false }
 jsonrpc-http-server = { version = "18.0.0", default-features = false }
@@ -23,8 +22,7 @@ reqwest = "0.12"
 color-eyre = { version = "0.6", default-features = false }
 
 [build-dependencies]
-# git = "https://github.com/tangle-network/blueprint.git", rev = "fa9eabf16aff9325ba30039653ffe9aca19afb06"
-blueprint-sdk = { version = "0.1.0-alpha.19", default-features = false, features = ["std", "eigenlayer", "evm", "macros", "build"], git = "https://github.com/tangle-network/blueprint.git", rev = "a961d9e6adcca0ffffdf113f01fd46f1f4562a12" }
+blueprint-sdk = { version = "0.1.0-alpha.19", default-features = false, features = ["std", "eigenlayer", "evm", "macros", "build"], git = "https://github.com/tangle-network/blueprint.git", rev = "24a4f499adbe6d661de0b464f729fcd9434b5e57" }
 
 [features]
 default = ["std"]
