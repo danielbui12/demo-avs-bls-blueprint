@@ -463,7 +463,7 @@ dependencies = [
  "lru 0.13.0",
  "parking_lot 0.12.4",
  "pin-project",
- "reqwest 0.12.23",
+ "reqwest 0.12.24",
  "serde",
  "serde_json",
  "thiserror 2.0.11",
@@ -532,7 +532,7 @@ dependencies = [
  "alloy-transport-ws",
  "futures",
  "pin-project",
- "reqwest 0.12.23",
+ "reqwest 0.12.24",
  "serde",
  "serde_json",
  "tokio",
@@ -857,7 +857,7 @@ checksum = "a2f8a6338d594f6c6481292215ee8f2fd7b986c80aba23f3f44e761a8658de78"
 dependencies = [
  "alloy-json-rpc",
  "alloy-transport",
- "reqwest 0.12.23",
+ "reqwest 0.12.24",
  "serde_json",
  "tower",
  "tracing",
@@ -2747,7 +2747,7 @@ dependencies = [
  "dialoguer",
  "dirs",
  "indicatif",
- "reqwest 0.12.23",
+ "reqwest 0.12.24",
  "serde_json",
  "sp-core",
  "tangle-subxt",
@@ -3084,7 +3084,7 @@ dependencies = [
  "jsonrpc-core",
  "jsonrpc-http-server",
  "num-bigint 0.4.6",
- "reqwest 0.12.23",
+ "reqwest 0.12.24",
  "serde",
  "serde_json",
  "thiserror 2.0.11",
@@ -3280,7 +3280,7 @@ dependencies = [
  "prometheus",
  "prost",
  "rand 0.8.5",
- "reqwest 0.12.23",
+ "reqwest 0.12.24",
  "serde",
  "serde_json",
  "sp-core",
@@ -5316,7 +5316,7 @@ dependencies = [
  "libc",
  "option-ext",
  "redox_users 0.5.2",
- "windows-sys 0.59.0",
+ "windows-sys 0.61.1",
 ]
 
 [[package]]
@@ -5819,7 +5819,7 @@ checksum = "46f240f414d0e4769d52b17889a0c50b525304ebdb3492f3e895663e4d48abc5"
 dependencies = [
  "alloy",
  "regex",
- "reqwest 0.12.23",
+ "reqwest 0.12.24",
  "serde",
 ]
 
@@ -13769,9 +13769,9 @@ dependencies = [
 
 [[package]]
 name = "reqwest"
-version = "0.12.23"
+version = "0.12.24"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d429f34c8092b2d42c7c93cec323bb4adeb7c67698f70839adec842ec10c7ceb"
+checksum = "9d0946410b9f7b082a427e4ef5c8ff541a88b357bc6c637c40db3a68ac70a36f"
 dependencies = [
  "base64 0.22.1",
  "bytes",
@@ -17065,7 +17065,7 @@ dependencies = [
  "color-eyre",
  "jsonrpc-core",
  "jsonrpc-http-server",
- "reqwest 0.12.23",
+ "reqwest 0.12.24",
  "serde",
  "thiserror 1.0.69",
 ]
