@@ -6,8 +6,6 @@ use blueprint_sdk::evm::extract::BlockEvents;
 use blueprint_sdk::extract::Context;
 use blueprint_sdk::{info, warn};
 
-const TASK_CHALLENGE_WINDOW_BLOCK: u32 = 100;
-const BLOCK_TIME_SECONDS: u32 = 12;
 pub const INITIALIZE_TASK_JOB_ID: u32 = 1;
 
 /// Initializes the task for the aggregator server

@@ -31,7 +31,7 @@ cast send 0xc0f115a19107322cfbf1cdbc7ea011c19ebdb4f8 "initialize(address,address
   --private-key 0x2a871d0798f97d79848a013d4936a73bf4cc922c825d33c1cf7073dff6d409c6
 
 # Open another terminal
-RUST_LOG=all cargo tangle blueprint run \
+RUST_LOG=info cargo tangle blueprint run \
      -p eigenlayer \
      -u http://localhost:55000/ \
      --keystore-path ./test-keystore

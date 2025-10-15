@@ -28,6 +28,7 @@ pub async fn example_task(
     Context(ctx): Context<CombinedContext>,
     BlockEvents(events): BlockEvents,
 ) -> Result<(), TaskError> {
+    info!("example_task");
     let client = ctx.example_context.client.clone();
 
     let task_created_events = events.iter().filter_map(|log| {

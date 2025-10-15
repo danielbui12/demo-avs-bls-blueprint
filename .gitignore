@@ -17,6 +17,7 @@ target/
 # Solc Compiler files
 cache/
 out/
+data/
 
 # Ignores development broadcast logs
 !/broadcast

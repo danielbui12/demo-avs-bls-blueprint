@@ -3,7 +3,6 @@ use crate::IBLSSignatureCheckerTypes::NonSignerStakesAndSignature;
 use crate::TangleTaskManager as ExampleTask;
 use crate::ITangleTaskManager::{Task, TaskResponse};
 use crate::{AGGREGATOR_PRIVATE_KEY, AGGREGATOR_ADDRESS};
-use blueprint_sdk::alloy::primitives::address;
 use blueprint_sdk::alloy::core::sol_types::SolType;
 use blueprint_sdk::eigenlayer::generic_task_aggregation::{
     EigenTask, ResponseSender, Result as AggResult, TaskResponse as GenericTaskResponse,

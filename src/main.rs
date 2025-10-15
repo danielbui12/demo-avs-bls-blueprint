@@ -1,7 +1,7 @@
 use test_eigen_bls_blueprint as blueprint;
 
 use blueprint_sdk::alloy::network::EthereumWallet;
-use blueprint_sdk::alloy::primitives::{address, Address, Bytes};
+use blueprint_sdk::alloy::primitives::{Address, Bytes};
 use blueprint_sdk::alloy::signers::local::PrivateKeySigner;
 use blueprint_sdk::evm::producer::{PollingConfig, PollingProducer};
 use blueprint_sdk::evm::util::get_wallet_provider_http;
@@ -58,34 +58,35 @@ async fn main() -> Result<(), blueprint_sdk::Error> {
     );
     let client = Arc::new(provider);
 
-     // Create producer for task events
-     let task_producer = PollingProducer::new(
+    // Create producer for task events
+    let task_producer = PollingProducer::new(
         client.clone(),
-        PollingConfig::default().poll_interval(Duration::from_secs(1)),
+        // PollingConfig::default().poll_interval(Duration::from_secs(1)),
+        PollingConfig::from_current().step(1).confirmations(1u64).poll_interval(Duration::from_secs(1)),
     )
     .await
     .map_err(|e| blueprint_sdk::Error::Other(e.to_string()))?;
 
-    // Spawn a task to create a task - this is just for testing/example purposes
-    info!("Spawning a task to create a task on the contract...");
-    tokio::spawn(async move {
-        let generator_signer: PrivateKeySigner = GENERATOR_PRIVATE_KEY.parse().expect("failed to generate wallet ");
-        let wallet = EthereumWallet::from(generator_signer);
-        let provider = get_wallet_provider_http(http_rpc_endpoint, wallet.clone());
-        let contract = TangleTaskManager::new(*TASK_MANAGER_ADDRESS, provider.clone());
-        loop {
-            tokio::time::sleep(Duration::from_secs(5)).await;
-            let task = contract
-                .createNewTask(Bytes::from_static(b"World"), 100u32, vec![0].into())
-                .from(GENERATOR_ADDRESS);
-            let receipt = task.send().await.unwrap().get_receipt().await.unwrap();
-            if receipt.status() {
-                info!("Task created successfully");
-            } else {
-                warn!("Task creation failed");
-            }
-        }
-    });
+    // // Spawn a task to create a task - this is just for testing/example purposes
+    // info!("Spawning a task to create a task on the contract...");
+    // tokio::spawn(async move {
+    //     let generator_signer: PrivateKeySigner = GENERATOR_PRIVATE_KEY.parse().expect("failed to generate wallet ");
+    //     let wallet = EthereumWallet::from(generator_signer);
+    //     let provider = get_wallet_provider_http(http_rpc_endpoint, wallet.clone());
+    //     let contract = TangleTaskManager::new(*TASK_MANAGER_ADDRESS, provider.clone());
+    //     loop {
+    //         tokio::time::sleep(Duration::from_secs(5)).await;
+    //         let task = contract
+    //             .createNewTask(Bytes::from_static(b"World"), 100u32, vec![0].into())
+    //             .from(GENERATOR_ADDRESS);
+    //         let receipt = task.send().await.unwrap().get_receipt().await.unwrap();
+    //         if receipt.status() {
+    //             info!("Task created successfully");
+    //         } else {
+    //             warn!("Task creation failed");
+    //         }
+    //     }
+    // });
 
     info!("Starting the event watcher ...");
     let eigen_config = EigenlayerBLSConfig::new(Address::default(), Address::default())
@@ -105,10 +106,6 @@ async fn main() -> Result<(), blueprint_sdk::Error> {
         })
         .run()
         .await?;
-
-
-    // Prevent main from exiting by awaiting a pending future
-    tokio::signal::ctrl_c().await.expect("failed to listen for ctrl_c");
 
     info!("Exiting...");
     Ok(())

@@ -2,15 +2,8 @@ pub mod contexts;
 pub mod jobs;
 pub mod error;
 
-use crate::error::TaskError;
-use crate::TangleTaskManager::NewTaskCreated;
 use blueprint_sdk::alloy::primitives::{address, Address};
 use blueprint_sdk::alloy::sol;
-use blueprint_sdk::alloy::sol_types::{SolEvent, SolValue};
-use blueprint_sdk::evm::extract::BlockEvents;
-use blueprint_sdk::extract::Context;
-use blueprint_sdk::info;
-use blueprint_sdk::runner::config::BlueprintEnvironment;
 use serde::{Deserialize, Serialize};
 use std::env;
 use std::sync::LazyLock;
@@ -26,7 +19,7 @@ sol!(
 pub static TASK_MANAGER_ADDRESS: LazyLock<Address> = LazyLock::new(|| {
     env::var("TASK_MANAGER_ADDRESS")
         .map(|addr| addr.parse().expect("Invalid TASK_MANAGER_ADDRESS"))
-        .unwrap_or_else(|_| address!("0000000000000000000000000000000000000000"))
+        .unwrap_or_else(|_| address!("c0f115a19107322cfbf1cdbc7ea011c19ebdb4f8"))
 });
 
 // @dev Anvil Account #3

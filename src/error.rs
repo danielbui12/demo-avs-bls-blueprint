@@ -1,7 +1,6 @@
 use std::net::AddrParseError;
 
 use blueprint_sdk::eigensdk::{
-    services_blsaggregation::bls_aggregation_service_error::BlsAggregationServiceError,
     types::operator::OperatorTypesError,
 };
 
@@ -18,8 +17,6 @@ pub enum TaskError {
     Parse(#[from] AddrParseError),
     #[error("Runtime: {0}")]
     Runtime(String),
-    #[error("Chain: {0}")]
-    Chain(String),
     #[error("Task: {0}")]
     Task(String),
 }
